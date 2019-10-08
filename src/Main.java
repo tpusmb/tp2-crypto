@@ -44,16 +44,16 @@ public class Main {
         taille_max = Math.max(taille_min, taille_max);
         String alphabet = propertyValues.getPropValues("alphabet");
 
-        IndicesEtEmpreintes indicesEtEmpreintes = new IndicesEtEmpreintes(alphabet, taille_min, taille_max);
-
         switch (choice) {
             case 1:
                 System.out.println("Hash MD5 of \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hashMD5(textTestMD5)));
                 break;
             case 2:
-                System.out.println(IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i), 1, Integer.parseInt(propertyValues.getPropValues("test_h2i"))));
+                int h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i), 1, Integer.parseInt(propertyValues.getPropValues("test_h2i")));
+                System.out.println("H2I test : " + h2i_res);
                 break;
             case 3:
+                IndicesEtEmpreintes indicesEtEmpreintes = new IndicesEtEmpreintes(alphabet, taille_min, taille_max);
                 int i2c_id = Integer.parseInt(propertyValues.getPropValues("test_i2c"));
                 System.out.println("I2C test with id " + i2c_id + ": " + indicesEtEmpreintes.i2c(i2c_id));
                 break;
