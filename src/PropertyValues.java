@@ -3,12 +3,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class PropertyValues {
+class PropertyValues {
 
     private InputStream inputStream;
     private Properties properties;
 
-    public PropertyValues() throws IOException {
+    PropertyValues() throws IOException {
 
         try {
             this.properties = new Properties();
@@ -30,7 +30,7 @@ public class PropertyValues {
 
     }
 
-    public String getPropValues(String propName) {
+    String getPropValues(String propName) {
         return this.properties.getProperty(propName);
     }
 
