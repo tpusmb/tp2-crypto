@@ -1,3 +1,4 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class IndicesEtEmpreintes {
@@ -27,6 +28,13 @@ public class IndicesEtEmpreintes {
         }
     }
 
+    /**
+     *
+     * @param y
+     * @param t colonne
+     * @param N
+     * @return
+     */
     public static int h2i(byte[] y, int t, int N) {
 
         int y_truck = Utils.byteToInt(Arrays.copyOfRange(y, 0, 8));
@@ -53,4 +61,12 @@ public class IndicesEtEmpreintes {
         }
         return res.reverse().toString();
     }
+
+    public static int i2i(int index, String clearText) throws NoSuchAlgorithmException {
+        int h2iResult = h2i(Hashage.hashMD5(clearText), index, 8);
+        String i2cResult = "";
+
+        return 0;
+    }
+
 }
