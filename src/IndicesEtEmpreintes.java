@@ -2,8 +2,8 @@ import java.util.Arrays;
 
 public class IndicesEtEmpreintes {
 
-    private double[] min_val;
-    private double[] max_val;
+    private int[] min_val;
+    private int[] max_val;
     private int[] nb_lettre;
     private double[] const_minus;
     private String alphabet;
@@ -11,18 +11,18 @@ public class IndicesEtEmpreintes {
     public IndicesEtEmpreintes(String alphabet, int taille_min, int taille_max) {
         this.alphabet = alphabet;
         int nb_test = (taille_max - taille_min) + 1;
-        this.min_val = new double[nb_test];
-        this.max_val = new double[nb_test];
+        this.min_val = new int[nb_test];
+        this.max_val = new int[nb_test];
         this.const_minus = new double[nb_test];
         this.nb_lettre = new int[nb_test];
         double acc = 0;
-        int nb_lettre_acc = taille_min;
+        int nb_lettre_acc = 0;
         for(int i = 0; i < nb_test; i++){
-            min_val[i] = Math.pow(alphabet.length(), nb_lettre_acc);
-            max_val[i] = Math.pow(alphabet.length(), nb_lettre_acc + 1);
+            min_val[i] = (int) Math.round(Math.pow(alphabet.length(), nb_lettre_acc));
+            max_val[i] = (int) Math.round(Math.pow(alphabet.length(), nb_lettre_acc + 1));
             const_minus[i] = acc;
             nb_lettre[i] = nb_lettre_acc;
-            acc += Math.pow(alphabet.length(), nb_lettre_acc);
+            acc += min_val[i];
             nb_lettre_acc++;
         }
     }
