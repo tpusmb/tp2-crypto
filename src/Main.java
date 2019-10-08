@@ -1,6 +1,9 @@
+import java.io.IOException;
+
 public class Main {
 
-    public static void main(String[] args) {
-	// write your code here
+    public static void main(String[] args) throws IOException {
+        PropertyValues propertyValues = new PropertyValues();
+        System.out.println(propertyValues.getPropValues("taille_min"));
     }
 }
