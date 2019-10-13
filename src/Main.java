@@ -49,7 +49,7 @@ public class Main {
                 System.out.println("Hash MD5 of \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hashMD5(textTestMD5)));
                 break;
             case 2:
-                int h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i), 1, Integer.parseInt(propertyValues.getPropValues("test_h2i")));
+                long h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i), 1, Integer.parseInt(propertyValues.getPropValues("test_h2i")));
                 System.out.println("H2I test : " + h2i_res);
                 break;
             case 3:

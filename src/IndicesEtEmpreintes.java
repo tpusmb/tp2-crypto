@@ -1,72 +1,61 @@
+import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 
 public class IndicesEtEmpreintes {
 
-    private int[] min_val;
-    private int[] max_val;
-    private int[] nb_lettre;
-    private double[] const_minus;
+    private int[] vals;
     private String alphabet;
+    private int taille_min, taille_max;
 
     public IndicesEtEmpreintes(String alphabet, int taille_min, int taille_max) {
         this.alphabet = alphabet;
-        int nb_test = (taille_max - taille_min) + 1;
-        this.min_val = new int[nb_test];
-        this.max_val = new int[nb_test];
-        this.const_minus = new double[nb_test];
-        this.nb_lettre = new int[nb_test];
-        double acc = 0;
-        int nb_lettre_acc = taille_min;
-        for(int i = 0; i < nb_test; i++){
-            min_val[i] = (int) Math.round(Math.pow(alphabet.length(), nb_lettre_acc));
-            max_val[i] = (int) Math.round(Math.pow(alphabet.length(), nb_lettre_acc + 1));
-            const_minus[i] = acc;
-            nb_lettre[i] = nb_lettre_acc;
-            acc += min_val[i];
-            nb_lettre_acc++;
+        this.taille_min = taille_min;
+        this.taille_max = taille_max;
+        int nb_test = (this.taille_max - this.taille_min) + 1;
+        this.vals = new int[nb_test];
+        int acc = 0;
+        for (int i = taille_min; i <= taille_max; i++) {
+            this.vals[acc] = (int) Math.pow(this.alphabet.length(), i);
+            acc++;
         }
     }
 
     /**
-     *
      * @param y
      * @param t colonne
      * @param N
      * @return
      */
-    public static int h2i(byte[] y, int t, int N) {
+    public static long h2i(byte[] y, int t, int N) {
 
-        int y_truck = Utils.byteToInt(Arrays.copyOfRange(y, 0, 8));
-        return (y_truck + t) % N;
+        BigInteger yInt = Utils.byteToInt(y);
+        return yInt.add(BigInteger.valueOf(t)).mod(BigInteger.valueOf(N)).longValue();
 
     }
 
+//    public static int i2i(int index, String clearText) throws NoSuchAlgorithmException {
+//        int h2iResult = h2i(Hashage.hashMD5(clearText), index, 8);
+//        String i2cResult = "";
+//
+//        return 0;
+//    }
 
-    public String i2c(int i){
+    public String i2c(int number) {
 
-        int norm_i = i;
-        int nb_lettre = 0;
-        for(int tab_index = 0; tab_index < this.max_val.length; tab_index++){
-            if(this.min_val[tab_index] <= i && i < this.max_val[tab_index]){
-                norm_i -= this.const_minus[tab_index];
-                nb_lettre = this.nb_lettre[tab_index];
+        int taille_mot = this.taille_min;
+        for (int val : this.vals) {
+            if (number < val)
                 break;
-            }
+            number -= val;
+            taille_mot++;
         }
-        StringBuilder res = new StringBuilder();
-        for(int loop = 0; loop < nb_lettre; loop++){
-            res.append(this.alphabet.charAt(norm_i % this.alphabet.length()));
-            norm_i /= this.alphabet.length();
+        StringBuilder str = new StringBuilder();
+        for(int i = 0; i < taille_mot; i++){
+            // Ajoue du char
+            str.insert(0, alphabet.charAt(number % this.alphabet.length()));
+            number = number / this.alphabet.length();
         }
-        return res.reverse().toString();
-    }
-
-    public static int i2i(int index, String clearText) throws NoSuchAlgorithmException {
-        int h2iResult = h2i(Hashage.hashMD5(clearText), index, 8);
-        String i2cResult = "";
-
-        return 0;
+        return str.toString();
     }
 
 }
