@@ -1,7 +1,15 @@
+/**
+ * Cell pour notre tableaut rainbow
+ */
 public class RainBowCell implements Comparable<RainBowCell>{
     private Integer index;
     private Long i2i_value;
 
+    /**
+     *
+     * @param index index lier a l'empreintes
+     * @param i2i_value empreintes obtenus avec i2i
+     */
     public RainBowCell(int index, long i2i_value) {
         this.index = index;
         this.i2i_value = i2i_value;

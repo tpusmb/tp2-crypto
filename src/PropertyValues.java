@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Class pour lire un fichier config (config.properties)
+ */
 class PropertyValues {
 
     private InputStream inputStream;
@@ -30,6 +33,12 @@ class PropertyValues {
 
     }
 
+    /**
+     * Obtien la valeur lier aux prop name
+     *
+     * @param propName nom de la property
+     * @return valeur lier
+     */
     String getPropValues(String propName) {
         return this.properties.getProperty(propName);
     }
