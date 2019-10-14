@@ -1,7 +1,9 @@
+import java.io.Serializable;
+
 /**
  * Cell pour notre tableaut rainbow
  */
-public class RainBowCell implements Comparable<RainBowCell>{
+public class RainBowCell implements Comparable<RainBowCell>, Serializable {
     private Integer index;
     private Long i2i_value;
 

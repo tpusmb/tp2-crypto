@@ -1,3 +1,4 @@
+import java.io.*;
 import java.math.BigInteger;
 import java.util.Random;
 
@@ -57,5 +58,45 @@ class Utils {
     static int index_aleatoire(int N) {
         Random r = new Random();
         return r.nextInt((N) + 1);
+    }
+
+    /**
+     * Save rainbow table
+     *
+     * @param rainBowTable obj to save
+     * @param fileName
+     */
+    static void saveRainBowTable(RainBowTable rainBowTable, String fileName) {
+        FileOutputStream f = null;
+        try {
+            f = new FileOutputStream(new File(fileName));
+            ObjectOutputStream o = new ObjectOutputStream(f);
+            o.writeObject(rainBowTable);
+            o.close();
+            f.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Read a rainbow table
+     *
+     * @param fileName
+     * @return the read object null if error
+     */
+    static RainBowTable readRainBowTable(String fileName) {
+        FileInputStream fi = null;
+        RainBowTable rainBowTable = null;
+        try {
+            fi = new FileInputStream(new File(fileName));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+            rainBowTable = (RainBowTable) oi.readObject();
+            oi.close();
+            fi.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return rainBowTable;
     }
 }

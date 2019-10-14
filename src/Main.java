@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 public class Main {
 
     public static void main(String[] args) {
-        while(true) {
+        while (true) {
             System.out.println("\n\nMenu options:");
             System.out.println("1. Hash MD5");
             System.out.println("2. h2i");
@@ -46,6 +46,7 @@ public class Main {
         long N = Utils.getN(taille_min, taille_max, alphabet.length());
         int hauteur_rainbow_table = Integer.parseInt(propertyValues.getPropValues("hauteur_rainbow_table"));
         int largeur_rainbow_table = Integer.parseInt(propertyValues.getPropValues("largeur_rainbow_table"));
+        boolean read_table = Boolean.getBoolean(propertyValues.getPropValues("read_table_file"));
         System.out.println("N = " + N);
         switch (choice) {
             case 1:
@@ -63,8 +64,14 @@ public class Main {
                 System.out.println("I2C test with id " + i2c_id + ": " + indicesEtEmpreintes.i2c(i2c_id));
                 break;
             case 4:
-                RainBowTable rainBowTable = new RainBowTable(largeur_rainbow_table, hauteur_rainbow_table,
-                        alphabet, taille_min, taille_max, N);
+                RainBowTable rainBowTable;
+                if (read_table) {
+                    rainBowTable = Utils.readRainBowTable(propertyValues.getPropValues("rainbow_table_file_name"));
+                } else {
+                    rainBowTable = new RainBowTable(largeur_rainbow_table, hauteur_rainbow_table,
+                            alphabet, taille_min, taille_max, N);
+                    Utils.saveRainBowTable(rainBowTable, propertyValues.getPropValues("rainbow_table_file_name"));
+                }
                 System.out.println(rainBowTable.toString());
         }
     }
