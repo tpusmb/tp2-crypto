@@ -4,7 +4,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Hashage {
 
-    public static byte[] hashMD5(String text) throws NoSuchAlgorithmException {
+    static byte[] hashMD5(String text) throws NoSuchAlgorithmException {
         byte[] bytesOfMessage = text.getBytes(StandardCharsets.UTF_8);
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
         return messageDigest.digest(bytesOfMessage);

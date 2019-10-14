@@ -39,17 +39,20 @@ public class Main {
         int taille_min = Integer.parseInt(propertyValues.getPropValues("taille_min"));
         int taille_max = Integer.parseInt(propertyValues.getPropValues("taille_max"));
         String textTestMD5 = propertyValues.getPropValues("testMD5");
-        String textTesth2i = propertyValues.getPropValues("chaine_h2i");
+        String textTesth2i = propertyValues.getPropValues("test_chaine_h2i");
         taille_min = Math.min(taille_min, taille_max);
         taille_max = Math.max(taille_min, taille_max);
         String alphabet = propertyValues.getPropValues("alphabet");
-
+        long N = Utils.getN(taille_min, taille_max, alphabet.length());
+        System.out.println("N = " + N);
         switch (choice) {
             case 1:
                 System.out.println("Hash MD5 of \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hashMD5(textTestMD5)));
                 break;
             case 2:
-                long h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i), 1, Integer.parseInt(propertyValues.getPropValues("test_h2i")));
+                long h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i),
+                        Integer.parseInt(propertyValues.getPropValues("t_h2i_test")),
+                        N);
                 System.out.println("H2I test : " + h2i_res);
                 break;
             case 3:

@@ -26,19 +26,12 @@ public class IndicesEtEmpreintes {
      * @param N
      * @return
      */
-    public static long h2i(byte[] y, int t, int N) {
+    public static long h2i(byte[] y, int t, long N) {
 
         BigInteger yInt = Utils.byteToInt(y);
         return yInt.add(BigInteger.valueOf(t)).mod(BigInteger.valueOf(N)).longValue();
 
     }
-
-//    public static int i2i(int index, String clearText) throws NoSuchAlgorithmException {
-//        int h2iResult = h2i(Hashage.hashMD5(clearText), index, 8);
-//        String i2cResult = "";
-//
-//        return 0;
-//    }
 
     public String i2c(int number) {
 
@@ -56,6 +49,10 @@ public class IndicesEtEmpreintes {
             number = number / this.alphabet.length();
         }
         return str.toString();
+    }
+
+    public long i2i(int number, int index, long N) throws NoSuchAlgorithmException {
+        return h2i(Hashage.hashMD5(i2c(number)), index, N);
     }
 
 }

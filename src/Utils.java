@@ -19,4 +19,12 @@ class Utils {
         }
         return buffer.toString();
     }
+
+    static long getN(int taille_min, int taille_max, int alphabet_length){
+        long N = 0;
+        for(int i = taille_min; i <= taille_max; i++){
+            N += Math.pow(alphabet_length, i);
+        }
+        return N;
+    }
 }
