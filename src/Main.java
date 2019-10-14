@@ -9,7 +9,7 @@ public class Main {
             System.out.println("1. Hash MD5");
             System.out.println("2. h2i");
             System.out.println("3. i2c");
-            System.out.println("4. Some menu option");
+            System.out.println("4. RainBow table");
             System.out.println("5. Exit the program");
             System.out.print("\nPlease select an option from 1-5\r\n");
 
@@ -44,6 +44,8 @@ public class Main {
         taille_max = Math.max(taille_min, taille_max);
         String alphabet = propertyValues.getPropValues("alphabet");
         long N = Utils.getN(taille_min, taille_max, alphabet.length());
+        int hauteur_rainbow_table = Integer.parseInt(propertyValues.getPropValues("hauteur_rainbow_table"));
+        int largeur_rainbow_table = Integer.parseInt(propertyValues.getPropValues("largeur_rainbow_table"));
         System.out.println("N = " + N);
         switch (choice) {
             case 1:
@@ -60,6 +62,10 @@ public class Main {
                 int i2c_id = Integer.parseInt(propertyValues.getPropValues("test_i2c"));
                 System.out.println("I2C test with id " + i2c_id + ": " + indicesEtEmpreintes.i2c(i2c_id));
                 break;
+            case 4:
+                RainBowTable rainBowTable = new RainBowTable(largeur_rainbow_table, hauteur_rainbow_table,
+                        alphabet, taille_min, taille_max, N);
+                System.out.println(rainBowTable.toString());
         }
     }
 }

@@ -51,6 +51,14 @@ public class IndicesEtEmpreintes {
         return str.toString();
     }
 
+    /**
+     *
+     * @param number I2c number to get String
+     * @param index H2i index
+     * @param N
+     * @return
+     * @throws NoSuchAlgorithmException
+     */
     public long i2i(int number, int index, long N) throws NoSuchAlgorithmException {
         return h2i(Hashage.hashMD5(i2c(number)), index, N);
     }

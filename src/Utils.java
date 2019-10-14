@@ -1,5 +1,6 @@
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.util.Random;
 
 class Utils {
 
@@ -26,5 +27,10 @@ class Utils {
             N += Math.pow(alphabet_length, i);
         }
         return N;
+    }
+
+    static int index_aleatoire(int N){
+        Random r = new Random();
+        return r.nextInt((N) + 1);
     }
 }
