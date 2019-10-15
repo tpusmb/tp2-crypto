@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 
 /**
  * Class pour manipuler des indices
  */
-public class IndicesEtEmpreintes {
+public class IndicesEtEmpreintes implements Serializable {
 
     // Liste des valeurs caluler pour i2c
     private int[] vals;
