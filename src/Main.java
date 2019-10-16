@@ -52,6 +52,7 @@ public class Main {
         int hauteur_rainbow_table = Integer.parseInt(propertyValues.getPropValues("hauteur_rainbow_table"));
         int largeur_rainbow_table = Integer.parseInt(propertyValues.getPropValues("largeur_rainbow_table"));
         boolean read_table = Boolean.getBoolean(propertyValues.getPropValues("read_table_file"));
+        boolean recherche_exhaustive = Boolean.getBoolean(propertyValues.getPropValues("recherche_exhaustive"));
         RainBowTable rainBowTable;
         System.out.println("N = " + N);
         System.out.println("Estimation couverture: " + Utils.couverture_estimation(hauteur_rainbow_table,
@@ -83,7 +84,7 @@ public class Main {
                         taille_min, taille_max, alphabet, N);
                 long debut_2 = System.currentTimeMillis();
                 String res = rainBowTable.inverse(Hashage.hashMD5(
-                        propertyValues.getPropValues("test_inverse_text")));
+                        propertyValues.getPropValues("test_inverse_text")), recherche_exhaustive);
                 System.out.println("Text a retrouver: " + propertyValues.getPropValues("test_inverse_text"));
                 System.out.println("config\n Largeur X Hauteur: " + largeur_rainbow_table + 'X' + hauteur_rainbow_table +
                         "\n Taille min = " + taille_min +
@@ -107,7 +108,7 @@ public class Main {
                                         int taille_min, int taille_max,
                                         String alphabet, long N) throws NoSuchAlgorithmException {
         System.out.println(hauteur);
-        if(hauteur > N)
+        if (hauteur > N)
             throw new IllegalArgumentException("La hauteur de la list est supèrieur au nombre total de textes clairs valides N");
         RainBowTable rainBowTable;
         if (read_table) {

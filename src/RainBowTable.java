@@ -51,13 +51,12 @@ public class RainBowTable implements Serializable {
     }
 
     /**
-     * Recherche si idx est dans notre rainbow table
+     * Recherche si idx est dans notre rainbow table a l'aide de la recherche dichotomique
      *
      * @param idx id a trouver
      * @return numéros des premières et dernières lignes dont les dernières colonnes sont égale à idx [start, end]
      */
-    private int[] recherche(long idx) {
-
+    private int[]recherche_dichotomique(long idx){
         int bas = 1, haut = this.rainBowTable.size() - 1, milieu;
         int rang = -1;
         do {
@@ -80,6 +79,44 @@ public class RainBowTable implements Serializable {
         return new int[]{start_rang, end_rang};
     }
 
+    /**
+     * Recherche si idx est dans notre rainbow table
+     *
+     * @param idx id a trouver
+     * @return numéros des premières et dernières lignes dont les dernières colonnes sont égale à idx [start, end]
+     */
+    private int[] recherche_exhaustive(long idx) {
+        int start_rang = -1;
+        int end_rang;
+        for (int i = 0; i < this.rainBowTable.size(); i++) {
+            if (this.rainBowTable.get(i).getI2i_value() == idx) {
+                start_rang = i;
+                break;
+            }
+        }
+        if (start_rang == -1)
+            return new int[]{-1, -1};
+
+        end_rang = start_rang;
+        while (end_rang < this.rainBowTable.size() && this.rainBowTable.get(end_rang).getI2i_value() == idx)
+            end_rang++;
+        end_rang--;
+        return new int[]{start_rang, end_rang};
+    }
+
+    /**
+     * Recherche si idx est dans notre rainbow table
+     * @param idx id a trouver
+     * @param recherche_exhaustive True la recherche exhaustive sera utiliser si False ce sera la recherche dichotomique
+     * @return
+     */
+    private int[] recherche(long idx, boolean recherche_exhaustive) {
+        if(recherche_exhaustive)
+            return recherche_exhaustive(idx);
+        else
+            return recherche_dichotomique(idx);
+    }
+
     /***
      * Verifie si le hashage de idx = h
      * @param h hash a craquer
@@ -99,10 +136,11 @@ public class RainBowTable implements Serializable {
 
     /**
      * @param h Hash a craquer
+     * @param  recherche_exhaustive True la recherche exhaustive sera utiliser si False ce sera la recherche dichotomique
      * @return null on n'a pas réussi a trouver la version text claire sinon le text claire
      * @throws NoSuchAlgorithmException Pour le hashage
      */
-    public String inverse(byte[] h) throws NoSuchAlgorithmException {
+    public String inverse(byte[] h, boolean recherche_exhaustive) throws NoSuchAlgorithmException {
         int nb_candidats = 0;
         long idx;
         int[] rang;
@@ -116,7 +154,7 @@ public class RainBowTable implements Serializable {
                 idx = this.indicesEtEmpreintes.i2i((int) idx, index, this.N);
             }
             // recherchd si idx dans notre table rainbow
-            rang = recherche(idx);
+            rang = recherche(idx, recherche_exhaustive);
             if (rang[0] != -1) {
                 // a partire du rang trouver on regarde si il n'y a pas le maim hash que celui a craquer
                 for (int i = rang[0]; i <= rang[1]; i++) {
