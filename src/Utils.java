@@ -99,4 +99,15 @@ class Utils {
         }
         return rainBowTable;
     }
+
+    static double couverture_estimation(int hauteur, int largeur, int N) {
+        double m = hauteur;
+        double v = 1.0;
+        for (int i = 0; i < largeur; i++) {
+            v = v * (1.0 - m / N);
+            m = N * (1 - Math.exp(-m / N));
+        }
+        return 100.0 * (1 - v);
+
+    }
 }

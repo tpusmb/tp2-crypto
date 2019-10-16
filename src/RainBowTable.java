@@ -18,7 +18,7 @@ public class RainBowTable implements Serializable {
      * @param taille_min taille min des mots
      * @param taille_max taille max des mots
      * @param N          nombre total de textes clairs valides
-     * @throws NoSuchAlgorithmException
+     * @throws NoSuchAlgorithmException Pour le hashage
      */
     public RainBowTable(int largeur, int hauteur, String alphabet,
                         int taille_min, int taille_max, long N) throws NoSuchAlgorithmException {
@@ -48,6 +48,88 @@ public class RainBowTable implements Serializable {
         }
         // Sort by i2i_value value
         Collections.sort(this.rainBowTable);
+    }
+
+    /**
+     * Recherche si idx est dans notre rainbow table
+     *
+     * @param idx id a trouver
+     * @return numéros des premières et dernières lignes dont les dernières colonnes sont égale à idx [start, end]
+     */
+    private int[] recherche(long idx) {
+
+        int bas = 1, haut = this.rainBowTable.size() - 1, milieu;
+        int rang = -1;
+        do {
+            milieu = (bas + haut) / 2;
+            if (idx == this.rainBowTable.get(milieu).getI2i_value()) rang = milieu;
+            else if (this.rainBowTable.get(milieu).getI2i_value() < idx) bas = milieu + 1;
+            else haut = milieu - 1;
+        }
+        while ((idx != this.rainBowTable.get(milieu).getI2i_value()) & (bas <= haut));
+        if (rang == -1)
+            return new int[]{-1, -1};
+        // Obtention de la plage des valeur egale a idx
+        int start_rang = rang - 1, end_rang = rang + 1;
+        while (start_rang >= 0 && this.rainBowTable.get(start_rang).getI2i_value() == idx)
+            start_rang--;
+        start_rang++;
+        while (end_rang < this.rainBowTable.size() && this.rainBowTable.get(end_rang).getI2i_value() == idx)
+            end_rang++;
+        end_rang--;
+        return new int[]{start_rang, end_rang};
+    }
+
+    /***
+     * Verifie si le hashage de idx = h
+     * @param h hash a craquer
+     * @param t H2i index
+     * @param idx id a comparer
+     * @return null le candidat n'est pas egale sinon son format text claire
+     * @throws NoSuchAlgorithmException Pour le hashage
+     */
+    private String verifie_candidat(byte[] h, int t, int idx) throws NoSuchAlgorithmException {
+        for (int i = 1; i < t; i++)
+            idx = (int) this.indicesEtEmpreintes.i2i(idx, t, this.N);
+        String clair = this.indicesEtEmpreintes.i2c(idx);
+        if (Utils.byteToInt(h).equals(Utils.byteToInt(Hashage.hashMD5(clair))))
+            return clair;
+        return null;
+    }
+
+    /**
+     * @param h Hash a craquer
+     * @return null on n'a pas réussi a trouver la version text claire sinon le text claire
+     * @throws NoSuchAlgorithmException Pour le hashage
+     */
+    public String inverse(byte[] h) throws NoSuchAlgorithmException {
+        int nb_candidats = 0;
+        long idx;
+        int[] rang;
+        String result;
+        // On parcoure nos colomne de notre table rainbow
+        for (int colomne = this.largeur - 1; colomne > 0; colomne--) {
+            // Obtention de empreintes de h
+            idx = IndicesEtEmpreintes.h2i(h, colomne, this.N);
+            // Calcule des empreintes recursive
+            for (int index = colomne + 1; index < largeur; index++) {
+                idx = this.indicesEtEmpreintes.i2i((int) idx, index, this.N);
+            }
+            // recherchd si idx dans notre table rainbow
+            rang = recherche(idx);
+            if (rang[0] != -1) {
+                // a partire du rang trouver on regarde si il n'y a pas le maim hash que celui a craquer
+                for (int i = rang[0]; i <= rang[1]; i++) {
+                    result = this.verifie_candidat(h, colomne, this.rainBowTable.get(i).getIndex());
+                    if (result != null)
+                        return result;
+                    else
+                        nb_candidats++;
+                }
+            }
+        }
+        System.out.println("Nb candidats: " + nb_candidats);
+        return null;
     }
 
     @Override
