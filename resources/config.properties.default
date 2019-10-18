@@ -1,23 +1,24 @@
 # ------------INFORMATION GENERAL------------
 
 # Alphabets a utiliser
-alphabet=ABCDEFGHIJKLMNOPQRSTUVWXYZ
+alphabet=ABCDEFGH
 # Fonction de hachage (MD5 ou SHA-1)
 fonction_hash=SHA-1
 # Taille min d'un mots
-taille_min=4
+taille_min=2
 # Taille max d'un mots
 taille_max=4
 # Hauteur de la table rainbow
-hauteur_rainbow_table=10000
+hauteur_rainbow_table=1000
 # Largeur de la table rainbow
-largeur_rainbow_table=10000
+largeur_rainbow_table=1000
 # Nom du fichier ou sauver la rainblow table
 rainbow_table_file_name=rainBowTable.txt
 # True on va lire le fichier rainbow_table_file_name. False on va calculer est le sauver
 read_table_file=False
 # True la recherche exhaustive sera utiliser si False ce sera la recherche dichotomique
 recherche_exhaustive=False
+
 # ------------PARTIE TEST------------
 
 # Pour tester un algo de hashages

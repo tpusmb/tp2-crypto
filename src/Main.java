@@ -56,6 +56,7 @@ public class Main {
         boolean recherche_exhaustive = Boolean.getBoolean(propertyValues.getPropValues("recherche_exhaustive"));
         RainBowTable rainBowTable;
         System.out.println("#### " + largeur_rainbow_table + 'X' + hauteur_rainbow_table);
+        System.out.println("- recherche exhaustive: " + recherche_exhaustive);
         System.out.println("- N = " + N);
         System.out.println("- Estimation couverture: " + Utils.couverture_estimation(hauteur_rainbow_table,
                 largeur_rainbow_table, (int) N) + '%');

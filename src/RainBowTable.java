@@ -33,8 +33,9 @@ public class RainBowTable implements Serializable {
         int rand_index;
         int i2i_acc;
         ArrayList<Integer> done_index = new ArrayList<>();
+        int progress_bar = 0;
         for (int i = 0; i < hauteur; i++) {
-
+            System.out.print("Creation de la table rainbow [" + (i * 100) / hauteur + "/100%]\r");
             // Obtention d'un index aux hazzard
             rand_index = Utils.index_aleatoire((int) this.N);
             while (done_index.contains(rand_index))
@@ -145,8 +146,11 @@ public class RainBowTable implements Serializable {
         long idx;
         int[] rang;
         String result;
+        int progress = 0;
         // On parcoure nos colomne de notre table rainbow
         for (int colomne = this.largeur - 1; colomne > 0; colomne--) {
+            System.out.print("Fonction inverse [" + ((progress * 100) / largeur) + "/100%]\r");
+            progress++;
             // Obtention de empreintes de h
             idx = IndicesEtEmpreintes.h2i(h, colomne, this.N);
             // Calcule des empreintes recursive
