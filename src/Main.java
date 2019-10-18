@@ -78,6 +78,7 @@ public class Main {
                         largeur_rainbow_table, hauteur_rainbow_table,
                         taille_min, taille_max, alphabet, N);
                 System.out.println(rainBowTable.toString());
+                break;
             case 5:
                 long debut = System.currentTimeMillis();
                 rainBowTable = Main.getRainBowTable(read_table, propertyValues,
@@ -89,14 +90,15 @@ public class Main {
                 System.out.println("- Text a retrouver: " + propertyValues.getPropValues("test_inverse_text"));
                 System.out.println("- Taille min = " + taille_min +
                         "\n- Taille max = " + taille_max);
-                System.out.print("- Temps de calcule de inverse en sec: " + (System.currentTimeMillis() - debut_2) * 0.001);
-                System.out.print("- Temps de calcule en sec: " + (System.currentTimeMillis() - debut) * 0.001);
+                System.out.println("- Temps de calcule de inverse en sec: " + (System.currentTimeMillis() - debut_2) * 0.001);
+                System.out.println("- Temps de calcule en sec: " + (System.currentTimeMillis() - debut) * 0.001);
 
                 if (res != null) {
                     System.out.println("**Text trouver: " + res + "**");
                 } else
                     System.out.println("**Pas de text trouver :(**");
                 System.out.println("\n");
+                break;
 
         }
     }
@@ -105,7 +107,6 @@ public class Main {
                                         int largeur, int hauteur,
                                         int taille_min, int taille_max,
                                         String alphabet, long N) throws NoSuchAlgorithmException {
-        System.out.println(hauteur);
         if (hauteur > N)
             throw new IllegalArgumentException("La hauteur de la list est supèrieur au nombre total de textes clairs valides N");
         RainBowTable rainBowTable;

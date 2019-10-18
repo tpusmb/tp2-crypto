@@ -166,7 +166,7 @@ public class RainBowTable implements Serializable {
                 }
             }
         }
-        System.out.println("Nb candidats: " + nb_candidats);
+        System.out.println("- Nb candidats: " + nb_candidats);
         return null;
     }
 
