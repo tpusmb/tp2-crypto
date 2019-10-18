@@ -2,7 +2,15 @@
 
 ## Installation
 
-Une fois les fichiers java compilés, il faut copier le fichier config `resources/config.properties` dans le même dossier.
+Pour compiler:
+
+    javac src/*.java -d out
+    
+Une fois les fichiers java compilés, il faut copier le fichier config `resources/config.properties` dans le dossier out.
+
+Enfin pour lancer le programme:
+
+    java Main
 
 ## Questions faites
 
