@@ -54,23 +54,24 @@ public class Main {
         boolean read_table = Boolean.getBoolean(propertyValues.getPropValues("read_table_file"));
         boolean recherche_exhaustive = Boolean.getBoolean(propertyValues.getPropValues("recherche_exhaustive"));
         RainBowTable rainBowTable;
-        System.out.println("N = " + N);
-        System.out.println("Estimation couverture: " + Utils.couverture_estimation(hauteur_rainbow_table,
+        System.out.println("#### " + largeur_rainbow_table + 'X' + hauteur_rainbow_table);
+        System.out.println("- N = " + N);
+        System.out.println("- Estimation couverture: " + Utils.couverture_estimation(hauteur_rainbow_table,
                 largeur_rainbow_table, (int) N) + '%');
         switch (choice) {
             case 1:
-                System.out.println("Hash MD5 of \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hashMD5(textTestMD5)));
+                System.out.println("- Hash MD5 of \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hashMD5(textTestMD5)));
                 break;
             case 2:
                 long h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i),
                         Integer.parseInt(propertyValues.getPropValues("t_h2i_test")),
                         N);
-                System.out.println("H2I test : " + h2i_res);
+                System.out.println("- H2I test : " + h2i_res);
                 break;
             case 3:
                 IndicesEtEmpreintes indicesEtEmpreintes = new IndicesEtEmpreintes(alphabet, taille_min, taille_max);
                 int i2c_id = Integer.parseInt(propertyValues.getPropValues("test_i2c"));
-                System.out.println("I2C test with id " + i2c_id + ": " + indicesEtEmpreintes.i2c(i2c_id));
+                System.out.println("- I2C test with id " + i2c_id + ": " + indicesEtEmpreintes.i2c(i2c_id));
                 break;
             case 4:
                 rainBowTable = Main.getRainBowTable(read_table, propertyValues,
@@ -85,20 +86,17 @@ public class Main {
                 long debut_2 = System.currentTimeMillis();
                 String res = rainBowTable.inverse(Hashage.hashMD5(
                         propertyValues.getPropValues("test_inverse_text")), recherche_exhaustive);
-                System.out.println("Text a retrouver: " + propertyValues.getPropValues("test_inverse_text"));
-                System.out.println("config\n Largeur X Hauteur: " + largeur_rainbow_table + 'X' + hauteur_rainbow_table +
-                        "\n Taille min = " + taille_min +
-                        "\n Taille max = " + taille_max);
-                System.out.print("Temps de calcule de inverse en sec: ");
-                System.out.println((System.currentTimeMillis() - debut_2) * 0.001);
-                System.out.print("Temps de calcule en sec: ");
-                System.out.println((System.currentTimeMillis() - debut) * 0.001);
+                System.out.println("- Text a retrouver: " + propertyValues.getPropValues("test_inverse_text"));
+                System.out.println("- Taille min = " + taille_min +
+                        "\n- Taille max = " + taille_max);
+                System.out.print("- Temps de calcule de inverse en sec: " + (System.currentTimeMillis() - debut_2) * 0.001);
+                System.out.print("- Temps de calcule en sec: " + (System.currentTimeMillis() - debut) * 0.001);
 
                 if (res != null) {
-                    System.out.println("Text trouver: " + res);
+                    System.out.println("**Text trouver: " + res + "**");
                 } else
-                    System.out.println("Pas de text trouver :(");
-                System.out.println("\n-------------------------------------");
+                    System.out.println("**Pas de text trouver :(**");
+                System.out.println("\n");
 
         }
     }

@@ -22,3 +22,16 @@ Le paramètre t augmente la couverture de la table car cela permet de changer de
 ### Question 10
 
 La recherche dichotomique est de complexité log2(n) puis nous l’apliquon n fois ou n est la largeur de notre table. Ce qui done O(n) = n*log2(n)
+
+#### 200X200
+N = 456976
+Estimation couverture: 8.212862409736289%
+200
+Nb candidats: 11
+Text a retrouver: ABCD
+
+- Taille min = 4
+- Taille max = 4
+Temps de calcule de inverse en sec: 0.10200000000000001
+Temps de calcule en sec: 0.39
+Pas de text trouver :(
