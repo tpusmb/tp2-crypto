@@ -22,3 +22,10 @@ Le paramètre t augmente la couverture de la table car cela permet de changer de
 ### Question 10
 
 La recherche dichotomique est de complexité log2(n), puis nous l’apliquons n fois où n est la largeur de notre table. Ce qui done O(n) = n*log2(n).
+
+### Resultat
+
+Les resultats avec différent algo de [rechercher](RESULT.md)
+
+Comme vous pouvez le voire sur un alphabet `ABCDEFGHIJKLMNOPQRSTUVWXYZ` nous n'arrions pas a trouver l'inverse du hash on n'a pas réussi a trouver pour quoi.<br>
+alors que sur le fichier config par defaut nous n'avons pas de problème a trouver l'inverse.
