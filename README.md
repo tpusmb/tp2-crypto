@@ -35,7 +35,7 @@ La recherche dichotomique est de complexité log2(n), puis nous l’apliquons n 
 
 ### Resultat
 
-Les resultats avec différents algo de [rechercher](RESULT.md)
+Les [resultats](RESULT.md) avec différents algo de recherche.
 
 Comme vous pouvez le voir sur un alphabet `ABCDEFGHIJKLMNOPQRSTUVWXYZ` nous n'arrivons pas a trouver l'inverse du hash, et n'avons pas réussi a trouver pourquoi.<br>
 Alors que sur le fichier config par defaut nous n'avons pas de problème à trouver l'inverse.
