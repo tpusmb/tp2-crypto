@@ -13,7 +13,7 @@ public class Main {
             System.out.println("2. h2i");
             System.out.println("3. i2c");
             System.out.println("4. Génération ou lecture d'une RainBow table");
-            System.out.println("5. Craquer un hachage");
+            System.out.println("5. Craquer un hashage");
             System.out.println("0. Quitter le programme");
             System.out.print("\nChoisissez une option de 1 à 5\r\n");
 
@@ -41,10 +41,10 @@ public class Main {
 
     private static void process(int choice) throws Exception {
         PropertyValues propertyValues = new PropertyValues();
-        Hachage.properties = propertyValues;
+        Hashage.properties = propertyValues;
         int taille_min = Integer.parseInt(propertyValues.getPropValues("taille_min"));
         int taille_max = Integer.parseInt(propertyValues.getPropValues("taille_max"));
-        String textTestMD5 = propertyValues.getPropValues("testMD5");
+        String textTestMD5 = propertyValues.getPropValues("testHash");
         String textTesth2i = propertyValues.getPropValues("test_chaine_h2i");
         taille_min = Math.min(taille_min, taille_max);
         taille_max = Math.max(taille_min, taille_max);
@@ -61,10 +61,10 @@ public class Main {
                 largeur_rainbow_table, (int) N) + '%');
         switch (choice) {
             case 1:
-                System.out.println("- Hach de \"" + textTestMD5 + "\": " + Utils.byteToString(Hachage.hach(textTestMD5)));
+                System.out.println("- Hash de \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hash(textTestMD5)));
                 break;
             case 2:
-                long h2i_res = IndicesEtEmpreintes.h2i(Hachage.hach(textTesth2i),
+                long h2i_res = IndicesEtEmpreintes.h2i(Hashage.hash(textTesth2i),
                         Integer.parseInt(propertyValues.getPropValues("t_h2i_test")),
                         N);
                 System.out.println("- H2I test : " + h2i_res);
@@ -86,7 +86,7 @@ public class Main {
                         largeur_rainbow_table, hauteur_rainbow_table,
                         taille_min, taille_max, alphabet, N);
                 long debut_2 = System.currentTimeMillis();
-                String res = rainBowTable.inverse(Hachage.hach(propertyValues.getPropValues("test_inverse_text")), recherche_exhaustive);
+                String res = rainBowTable.inverse(Hashage.hash(propertyValues.getPropValues("test_inverse_text")), recherche_exhaustive);
                 System.out.println("- Text a retrouver: " + propertyValues.getPropValues("test_inverse_text"));
                 System.out.println("- Taille min = " + taille_min +
                         "\n- Taille max = " + taille_max);
@@ -108,7 +108,7 @@ public class Main {
                                         int taille_min, int taille_max,
                                         String alphabet, long N) throws NoSuchAlgorithmException {
         if (hauteur > N)
-            throw new IllegalArgumentException("La hauteur de la list est supèrieur au nombre total de textes clairs valides N");
+            throw new IllegalArgumentException("La hauteur de la liste est superieure au nombre total de textes clairs valides N");
         RainBowTable rainBowTable;
         if (read_table) {
             rainBowTable = Utils.readRainBowTable(propertyValues.getPropValues("rainbow_table_file_name"));

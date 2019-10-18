@@ -129,7 +129,7 @@ public class RainBowTable implements Serializable {
         for (int i = 1; i < t; i++)
             idx = (int) this.indicesEtEmpreintes.i2i(idx, t, this.N);
         String clair = this.indicesEtEmpreintes.i2c(idx);
-        if (Utils.byteToInt(h).equals(Utils.byteToInt(Hachage.hach(clair))))
+        if (Utils.byteToInt(h).equals(Utils.byteToInt(Hashage.hash(clair))))
             return clair;
         return null;
     }
