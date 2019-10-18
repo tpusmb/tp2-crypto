@@ -9,13 +9,13 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             System.out.println("\n\nMenu options:");
-            System.out.println("1. Hash MD5");
+            System.out.println("1. Hash");
             System.out.println("2. h2i");
             System.out.println("3. i2c");
-            System.out.println("4. Génération ou lecture d'unr RainBow table");
-            System.out.println("5. Craquer un hashage");
-            System.out.println("0. Exit the program");
-            System.out.print("\nPlease select an option from 1-5\r\n");
+            System.out.println("4. Génération ou lecture d'une RainBow table");
+            System.out.println("5. Craquer un hachage");
+            System.out.println("0. Quitter le programme");
+            System.out.print("\nChoisissez une option de 1 à 5\r\n");
 
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -41,6 +41,7 @@ public class Main {
 
     private static void process(int choice) throws Exception {
         PropertyValues propertyValues = new PropertyValues();
+        Hachage.properties = propertyValues;
         int taille_min = Integer.parseInt(propertyValues.getPropValues("taille_min"));
         int taille_max = Integer.parseInt(propertyValues.getPropValues("taille_max"));
         String textTestMD5 = propertyValues.getPropValues("testMD5");
@@ -60,10 +61,10 @@ public class Main {
                 largeur_rainbow_table, (int) N) + '%');
         switch (choice) {
             case 1:
-                System.out.println("- Hash MD5 of \"" + textTestMD5 + "\": " + Utils.byteToString(Hashage.hashMD5(textTestMD5)));
+                System.out.println("- Hach de \"" + textTestMD5 + "\": " + Utils.byteToString(Hachage.hach(textTestMD5)));
                 break;
             case 2:
-                long h2i_res = IndicesEtEmpreintes.h2i(Hashage.hashMD5(textTesth2i),
+                long h2i_res = IndicesEtEmpreintes.h2i(Hachage.hach(textTesth2i),
                         Integer.parseInt(propertyValues.getPropValues("t_h2i_test")),
                         N);
                 System.out.println("- H2I test : " + h2i_res);
@@ -85,8 +86,7 @@ public class Main {
                         largeur_rainbow_table, hauteur_rainbow_table,
                         taille_min, taille_max, alphabet, N);
                 long debut_2 = System.currentTimeMillis();
-                String res = rainBowTable.inverse(Hashage.hashMD5(
-                        propertyValues.getPropValues("test_inverse_text")), recherche_exhaustive);
+                String res = rainBowTable.inverse(Hachage.hach(propertyValues.getPropValues("test_inverse_text")), recherche_exhaustive);
                 System.out.println("- Text a retrouver: " + propertyValues.getPropValues("test_inverse_text"));
                 System.out.println("- Taille min = " + taille_min +
                         "\n- Taille max = " + taille_max);

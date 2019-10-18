@@ -5,17 +5,18 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Class pour implementer des algo de hash
  */
-public class Hashage {
+public class Hachage {
 
+    public static PropertyValues  properties;
     /**
-     * Hashage md5
+     * Hachage
      * @param text
      * @return
      * @throws NoSuchAlgorithmException
      */
-    static byte[] hashMD5(String text) throws NoSuchAlgorithmException {
+    static byte[] hach(String text) throws NoSuchAlgorithmException {
         byte[] bytesOfMessage = text.getBytes(StandardCharsets.UTF_8);
-        MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+        MessageDigest messageDigest = MessageDigest.getInstance(properties.getPropValues("fonction_hach"));
         return messageDigest.digest(bytesOfMessage);
     }
 }

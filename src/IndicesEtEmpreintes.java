@@ -82,7 +82,7 @@ public class IndicesEtEmpreintes implements Serializable {
      * @throws NoSuchAlgorithmException
      */
     public long i2i(int number, int index, long N) throws NoSuchAlgorithmException {
-        return h2i(Hashage.hashMD5(i2c(number)), index, N);
+        return h2i(Hachage.hach(i2c(number)), index, N);
     }
 
 }
